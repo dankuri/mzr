@@ -17,6 +17,13 @@ pub fn main() !void {
     defer argIter.deinit();
     _ = argIter.skip();
 
+    if (argIter.next()) |arg| {
+        try argv.append(arg);
+    } else {
+        std.debug.print("No command to run\n", .{});
+        return;
+    }
+
     while (argIter.next()) |arg| {
         try argv.append(arg);
     }
