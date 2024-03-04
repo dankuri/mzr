@@ -44,6 +44,5 @@ pub fn main() !void {
     } else {
         std.debug.print("Max Memory Usage: N/A\n", .{});
     }
-
-    std.debug.print("Resource Usage Statistics: {?}\n", .{rus.rusage});
+    // std.debug.print("Resource Usage Statistics: {?}\n", .{rus.rusage});
 }
