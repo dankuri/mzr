@@ -27,17 +27,25 @@ pub fn main() !void {
     cp.request_resource_usage_statistics = true;
     var startTime = try std.time.Instant.now();
     _ = try cp.spawn();
-    const pid = cp.id;
-    std.debug.print("PID: {}\n", .{pid});
+    // const pid = cp.id;
+    // std.debug.print("PID: {}\n", .{pid});
     _ = try cp.wait();
     var endTime = try std.time.Instant.now();
     var elapsed = endTime.since(startTime);
-    std.debug.print("Elapsed time: {}\n", .{std.fmt.fmtDuration(elapsed)});
+    std.debug.print("\ncmd: ", .{});
+    printJoinedString(argv.items);
+    std.debug.print("\ttime: {}", .{std.fmt.fmtDuration(elapsed)});
     const rus = cp.resource_usage_statistics;
     if (rus.getMaxRss()) |rssNum| {
-        std.debug.print("Max Memory Usage: {}\n", .{std.fmt.fmtIntSizeBin(rssNum)});
+        std.debug.print("\tmax mem: {}\n", .{std.fmt.fmtIntSizeBin(rssNum)});
     } else {
-        std.debug.print("Max Memory Usage: N/A\n", .{});
+        std.debug.print("\tmax mem: N/A\n", .{});
     }
     // std.debug.print("Resource Usage Statistics: {?}\n", .{rus.rusage});
+}
+
+fn printJoinedString(strings: [][]const u8) void {
+    for (strings) |s| {
+        std.debug.print("{s} ", .{s});
+    }
 }
