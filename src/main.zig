@@ -32,7 +32,7 @@ pub fn main() !void {
     _ = try cp.wait();
     var endTime = try std.time.Instant.now();
     var elapsed = endTime.since(startTime);
-    std.debug.print("\ncmd: ", .{});
+    std.debug.print("cmd: ", .{});
     printJoinedString(argv.items);
     std.debug.print("\ttime: {}", .{std.fmt.fmtDuration(elapsed)});
     const rus = cp.resource_usage_statistics;
