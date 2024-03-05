@@ -25,13 +25,13 @@ pub fn main() !void {
 
     var cp = std.process.Child.init(argv.items, allocator);
     cp.request_resource_usage_statistics = true;
-    var startTime = try std.time.Instant.now();
+    const startTime = try std.time.Instant.now();
     _ = try cp.spawn();
     // const pid = cp.id;
     // std.debug.print("PID: {}\n", .{pid});
     _ = try cp.wait();
-    var endTime = try std.time.Instant.now();
-    var elapsed = endTime.since(startTime);
+    const endTime = try std.time.Instant.now();
+    const elapsed = endTime.since(startTime);
     std.debug.print("cmd: ", .{});
     printJoinedString(argv.items);
     std.debug.print("\ttime: {}", .{std.fmt.fmtDuration(elapsed)});
